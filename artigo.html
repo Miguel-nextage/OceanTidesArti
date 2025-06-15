@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ocean Tides</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="padrao.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head> 
+
+<script>
+  function animaScroll() {
+    const elementos = document.querySelectorAll('[data-anima]');
+    const windowTop = window.pageYOffset + window.innerHeight * 0.85;
+
+    elementos.forEach((el) => {
+      if (windowTop > el.offsetTop) {
+        el.classList.add('ativo');
+      } else {
+        el.classList.remove('ativo');
+      }
+    });
+  }
+  window.addEventListener('scroll', animaScroll);
+  window.addEventListener('load', animaScroll);
+</script>
+
+<body style="background-color: black;">
+<script>
+// Detecta o scroll e muda o estilo da navbar
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navegacao-barra');
+  const scrollPosition = window.scrollY;
+  const triggerHeight = window.innerHeight * 0.1; 
+  
+  if (scrollPosition > triggerHeight) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+</script>
+
+<!--DIALOG DO POP UP DOAÇÃO, TUDO ENTRE ESTE COMENTÁRIO ENVOLVE JAVASCRIPT-->
+
+<dialog id="doacao-dialog">
+  <button onclick="FecharPopupDoacao()" type="button" class="botao-popup-doacao"><img src="midia/botao fechar.png" > </button>
+
+  <div class="pop-up-container-esq">
+    <img class="img-popup-doacao" src="midia/imagem doacao.jpg" alt="submerso">
+
+    <h2>Você pode fazer a diferença.</h2>
+    <p class="primeiro">Para tornar o mundo mais amável e seguro novamente, contamos com a sua ajuda.</p>
+
+    <p class="segundo">É para estas causas que o seu dinheiro vai:</p>
+  </div>
+
+  <div class="pop-up-container-dir">
+  <h3>Sua doação importa.</h3>
+  <div class="doacao-opcoes">
+    <button type="submit" class="doacao-opcao" onclick="MudaValor5()" id="botao-doacao-5">R$5</button>
+    <button type="submit" class="doacao-opcao" onclick="MudaValor10()" id="botao-doacao-10">R$10</button>
+    <button type="submit" class="doacao-opcao" onclick="MudaValor25()" id="botao-doacao-25">R$25</button>
+    <button type="submit" class="doacao-opcao" onclick="MudaValor50()" id="botao-doacao-50">R$50</button>
+    <button type="submit" class="doacao-opcao" onclick="MudaValor75()" id="botao-doacao-75">R$75</button>
+    <button type="submit" class="doacao-opcao" onclick="MudaValor100()" id="botao-doacao-100">R$100</button>
+    <div class="valor_preco">
+      <span class="simbolo-moeda">R$</span>
+      <input type="number" placeholder="Seu preço aqui:" min="1" step="any" id="valor" class="doacao-input"/>
+    </div>
+  </div>
+  <button type="submit" class="enviar" id="enviar" onclick="Envia()">Doar</button>
+</div>
+
+</dialog>
+
+
+<script>
+  const dialog = document.getElementById("doacao-dialog")
+  const botao = document.getElementById("botao-doacao")
+
+  function AbrirPopupDoacao() {
+    dialog.showModal()
+  }
+
+  function FecharPopupDoacao() {
+    dialog.close()
+  }
+</script>
+
+<!--DIALOG DO POP UP DOAÇÃO, TUDO ENTRE ESTE COMENTÁRIO ENVOLVE JAVASCRIPT-->
+
+<div class="video-container">
+  <video autoplay muted loop class="video-bg">
+    <source src="" type="video/mp4" />
+    Seu navegador não suporta vídeo em HTML5.
+  </video>
+  
+  <header>
+    <div class="navegacao-barra">
+      <a href="pagina-inicial.html"><img alt="logo" src="midia/logo.png" class="logo" ></a>
+      <div class="navegacao">
+        <nav>
+          <ul>
+            <li><button class="botao-nao-decorado" href="#">Sobre Nós</button></li>
+            <li><button class="botao-nao-decorado" href="#">Newsletter</button></li>
+            <li><button class="botao-nao-decorado" href="#">Loja</button></li>
+            <li><button class="botao-nao-decorado" type="button" onclick="AbrirPopupDoacao()">Doe</button></li>
+          </ul>
+        </nav>
+      </div>
+      <hr />
+    </div>
+  </header>
+
+  <script src="botao-doacao.js"></script>
+
+ <!-- Espaço para compensar o header fixo -->
+  <div style="height: 100px;"></div>
+
+  <!-- Conteúdo principal do artigo -->
+ <main data-anima class="container" style="max-width: 1100px; margin: auto; padding: 2rem; display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+
+  <!-- Coluna esquerda: imagem + texto -->
+  <div style="flex: 1 1 60%; min-width: 300px;">
+    
+    <h1 style="color: #ffffff;">placeholder titulo pra algo sobre golfinhos japoneses sei la</h1>
+    <p style="color: #666; font-size: 0.9rem;">&bullet; Publicado em: 29 de Abril de 2025</p>
+
+    <img src="midia/persona-5-tokyo-rainy-night-thumb.jpg" alt="Baleia" style="width: 100%; border-radius: 10px; box-shadow: 0 0 0 4px white; margin-bottom: 1.5rem;">
+
+  <p style="color: beige;">A tchahahahahahahahha tchahahahahahahahha tchahahahahahahahha tchahahahahahahahha tchahahahahahahahha.</p>
+
+    <p style="color: beige;">A tchahahahahahahahha tchahahahahahahahha tchahahahahahahahha tchahahahahahahahha tchahahahahahahahha.</p>
+
+    <p style="color: beige;">A tchahahahahahahahha tchahahahahahahahha tchahahahahahahahha tchahahahahahahahha tchahahahahahahahha.</p>
+
+  </div>
+
+  <!-- Coluna direita: barra lateral com links -->
+  <aside style="flex: 1 1 30%; min-width: 250px; background: #f5f5f5; padding: 1rem; border-radius: 10px;">
+    <h3 style="margin-top: 0; color: #2c3e50;">Artigos relacionados</h3>
+    <ul style="list-style: none; padding-left: 0;">
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+    </ul>
+  </aside>
+
+</main>
+
+  <!-- Rodapé simples -->
+  <footer style="background: rgb(212, 211, 211); color: rgb(0, 0, 0); text-align: center; padding: 2rem; margin-top: 4rem;">
+    <p>Siga a Ocean Tides nas redes sociais:</p>
+    <p>
+      <a href="#" style="color: #00aaff;">Instagram</a> |
+      <a href="#" style="color: #00aaff;">Facebook</a> |
+      <a href="#" style="color: #00aaff;">Twitter</a>
+    </p>
+  </footer>
+
+</body>
+</html>
