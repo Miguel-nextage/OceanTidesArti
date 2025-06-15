@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre Nós - Ocean Tides</title>
+  <link rel="stylesheet" href="padrao.css" />
+</head>
+<body style="background-color: black; color: white;">
+
+  <script>
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navegacao-barra');
+      const scrollPosition = window.scrollY;
+      const triggerHeight = window.innerHeight * 0.1;
+      if (scrollPosition > triggerHeight) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  </script>
+
+  <header>
+    <div class="navegacao-barra">
+      <a href="pagina-inicial.html"><img alt="logo" src="midia/logo.png" class="logo"></a>
+      <div class="navegacao">
+        <nav>
+          <ul>
+            <li><button class="botao-nao-decorado" href="#">Sobre Nós</button></li>
+            <li><button class="botao-nao-decorado" href="#">Newsletter</button></li>
+            <li><button class="botao-nao-decorado" href="#">Loja</button></li>
+            <li><button class="botao-nao-decorado" type="button" onclick="AbrirPopupDoacao()">Doe</button></li>
+          </ul>
+        </nav>
+      </div>
+      <hr />
+    </div>
+  </header>
+
+  <main style="max-width: 1000px; margin: 140px auto 60px; padding: 0 2rem; font-family: sans-serif;">
+    <h1 style="font-size: 2.5rem; color: #2c3e50; text-align: center;">Sobre Nós</h1>
+
+    <p style="font-size: 1.1rem; margin-top: 2rem;">
+      A <strong>Ocean Tides</strong> é uma iniciativa inspirada pela necessidade urgente de proteger nossos oceanos e as espécies marinhas ameaçadas. Lutamos diariamente contra a destruição dos ecossistemas marinhos através da educação, conscientização e ação direta.
+    </p>
+
+    <img src="midia/persona-5-tokyo-rainy-night-thumb.jpg" alt="Equipe Ocean Tides" style="width: 100%; border-radius: 10px; box-shadow: 0 0 0 4px white; margin: 2rem 0;">
+
+    <p>
+      Nossa equipe é composta por cientistas, ativistas e voluntários apaixonados pela vida marinha. Acreditamos que pequenas ações podem gerar grandes impactos e convidamos você a fazer parte dessa mudança.
+    </p>
+
+    <p>
+      Trabalhamos com comunidades costeiras, campanhas educativas e fiscalização ambiental para garantir um futuro melhor para as próximas gerações. Estamos comprometidos com a transparência, sustentabilidade e impacto real.
+    </p>
+
+    <div style="margin-top: 3rem; text-align: center;">
+      <h2>Junte-se a nós nessa jornada.</h2>
+      <button class="decorado" onclick="AbrirPopupDoacao()">Quero Apoiar</button>
+    </div>
+  </main>
+
+  <footer style="background: black; color: white; text-align: center; padding: 2rem; margin-top: 4rem;">
+    <p>© 2025 Ocean Tides — Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    function AbrirPopupDoacao() {
+      const dialog = document.getElementById("doacao-dialog");
+      dialog?.showModal();
+    }
+  </script>
+
+</body>
+</html>
