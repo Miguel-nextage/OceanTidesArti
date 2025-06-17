@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ocean Tides</title>
+  <link rel="stylesheet" href="padrao.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head> 
+
+<body style="background-color: black;">
+<script>
+// Detecta o scroll e muda o estilo da navbar
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navegacao-barra');
+  const scrollPosition = window.scrollY;
+  const triggerHeight = window.innerHeight * 0.1; 
+  
+  if (scrollPosition > triggerHeight) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+</script>
+
+<!--DIALOG DO POP UP DOAÇÃO, TUDO ENTRE ESTE COMENTÁRIO ENVOLVE JAVASCRIPT-->
+
+<dialog id="doacao-dialog">
+  <button onclick="FecharPopupDoacao()" type="button" class="botao-popup-doacao"><img src="midia/botao fechar.png" > </button>
+
+  <div class="pop-up-container-esq">
+    <img class="img-popup-doacao" src="midia/imagem doacao.jpg" alt="submerso">
+
+    <h2>Você pode fazer a diferença.</h2>
+    <p class="primeiro">Para tornar o mundo mais amável e seguro novamente, contamos com a sua ajuda.</p>
+
+    <p class="segundo">É para estas causas que o seu dinheiro vai:</p>
+  </div>
+
+  <div class="pop-up-container-dir">
+  <h3>Sua doação importa.</h3>
+  <div class="doacao-opcoes">
+    <button type="submit" class="doacao-opcao" onclick="MudaValor5()" id="botao-doacao-5">R$5</button>
+    <button type="submit" class="doacao-opcao" onclick="MudaValor10()" id="botao-doacao-10">R$10</button>
+    <button type="submit" class="doacao-opcao" onclick="MudaValor25()" id="botao-doacao-25">R$25</button>
+    <button type="submit" class="doacao-opcao" onclick="MudaValor50()" id="botao-doacao-50">R$50</button>
+    <button type="submit" class="doacao-opcao" onclick="MudaValor75()" id="botao-doacao-75">R$75</button>
+    <button type="submit" class="doacao-opcao" onclick="MudaValor100()" id="botao-doacao-100">R$100</button>
+    <div class="valor_preco">
+      <span class="simbolo-moeda">R$</span>
+      <input type="number" placeholder="Seu preço aqui:" min="1" step="any" id="valor" class="doacao-input"/>
+    </div>
+  </div>
+  <button type="submit" class="enviar" id="enviar" onclick="Envia()">Doar</button>
+</div>
+
+</dialog>
+
+
+<script>
+  const dialog = document.getElementById("doacao-dialog")
+  const botao = document.getElementById("botao-doacao")
+
+  function AbrirPopupDoacao() {
+    dialog.showModal()
+  }
+
+  function FecharPopupDoacao() {
+    dialog.close()
+  }
+</script>
+
+<!--DIALOG DO POP UP DOAÇÃO, TUDO ENTRE ESTE COMENTÁRIO ENVOLVE JAVASCRIPT-->
+
+<div class="video-container">
+  <video autoplay muted loop class="video-bg">
+    <source src="" type="video/mp4" />
+    Seu navegador não suporta vídeo em HTML5.
+  </video>
+  
+  <header>
+    <div class="navegacao-barra">
+      <a href="pagina-inicial.html"><img alt="logo" src="midia/logo.png" class="logo" ></a>
+      <div class="navegacao">
+        <nav>
+          <ul>
+            <li><button class="botao-nao-decorado" href="#">Sobre Nós</button></li>
+            <li><button class="botao-nao-decorado" href="#">Newsletter</button></li>
+            <li><button class="botao-nao-decorado" href="#">Loja</button></li>
+            <li><button class="botao-nao-decorado" type="button" onclick="AbrirPopupDoacao()">Doe</button></li>
+          </ul>
+        </nav>
+      </div>
+      <hr />
+    </div>
+  </header>
+
+  <script src="botao-doacao.js"></script>
+
+ <!-- Espaço para compensar o header fixo -->
+  <div style="height: 100px;"></div>
+
+  <!-- Conteúdo principal do artigo -->
+ <main class="container" style="max-width: 1100px; margin: auto; padding: 2rem; display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+
+  <!-- Coluna esquerda: imagem + texto -->
+  <div style="flex: 1 1 60%; min-width: 300px;">
+    
+    <h1 style="color: #ffffff;">Como as tartarugas nascem?</h1>
+    <p style="color: #666; font-size: 0.9rem;">&bullet; Publicado em: 29 de Abril de 2025</p>
+
+    <img src="midia/persona-5-tokyo-rainy-night-thumb.jpg" alt="Baleia" style="width: 100%; border-radius: 10px; box-shadow: 0 0 0 4px white; margin-bottom: 1.5rem;">
+
+  <p style="color: beige;">As tartarugas São animais pertencentes à Ordem dos Testudines que se adaptaram maravilhosamente a diferentes ambientes, habitats e ambientes, por isso se tornaram populares em muitos países, sendo até considerados animais domésticos em alguns casos.
+    No entanto, após a reprodução dos quelônios, é muito provável que você se pergunte <b>como as tartarugas nascem</b>
+    Vamos falar sobre aqueles que vivem na terra, no mar ou na água doce.</p>
+  <p style="color: beige;">Você sabia que uma tartaruga marinha pode colocar <b>mais de 800 ovos</b> em um único período reprodutivo?
+    Neste artigo, falaremos em detalhes sobre o nascimento das tartarugas e muitos outros aspectos importantes desse período.
+    Continue lendo para descobrir tudo sobre esses animais fascinantes!</p>
+
+  <h2 style="color: #ffffff;">Informações sobre tartarugas</h2>
+  <p style="color: beige;">As tartarugas pertencem ao reino animal, pertencendo à família dos répteis, sendo da Ordem dos Testudinos ou quelônios.
+    Eles são caracterizados por serem animais vertebrados tetrápodes e com uma concha que é fixada na parte dorsal da coluna vertebral. leste <b>Concha</b> É composto por diferentes lâminas ósseas que cobrem tanto a parte ventral, uma área chamada plastrão, quanto a parte dorsal, chamada dorso. 
+    Eles fazem uma muda tanto da pele quanto das camadas que compõem os escudos da concha</p>
+  <p style="color: beige;">São animais <b>poiquilotérmicos</b> ou <b>ectotérmicos</b>, o que significa que eles não têm a capacidade de autorregular sua própria temperatura corporal, 
+    algo que o meio ambiente fará. Eles não têm dentes, mas têm um bico ossudo que se assemelha ao de alguns pássaros.</p>
+
+  <img src="midia/persona-5-tokyo-rainy-night-thumb.jpg" alt="Baleia" style="width: 100%; border-radius: 10px; box-shadow: 0 0 0 4px white; margin-bottom: 1.5rem;">
+
+  <h2 style="color: #ffffff;">Onde vivem as tartarugas?</h2>
+  <p style="color: beige;">As tartarugas são répteis que estão presentes em uma grande variedade de habitats e ecossistemas. 
+    Eles habitam mares, rios, lagos, florestas e selvas, entre outros. Dependendo da espécie de tartaruga, podemos encontrá-los em:</p>
+  <p style="color: beige;">As <b>tartarugas terrestres</b> vivem em selvas, desertos e florestas, adaptando-se a condições áridas e temperaturas extremamente altas.</p>
+  <p style="color: beige;">As <b>tartarugas marinhas</b> Eles vivem nos mares e oceanos de todo o planeta, preferindo as regiões tropicais e subtropicais. 
+    Eles não estão presentes em áreas muito frias, muito menos nos pólos.</p>
+  <p style="color: beige;">As <b>tartarugas de água doce</b> Vivem em rios, florestas, selvas e lagos onde, em geral, as temperaturas são temperadas ou amenas.</p>
+  <p style="color: beige;">No caso de mantê-los como animais de estimação, as tartarugas precisam de um <b>espaço de vida adaptado ou terrário</b> às suas dimensões e em que as condições
+     de temperatura e umidade sejam bem controladas. 
+     Se temos tartarugas aquáticas em casa, elas devem permanecer em um aquário de água doce ou salgada de acordo com o tipo e a uma temperatura adequada.</p>
+  
+  <h2 style="color: #ffffff;">Reprodução das tartarugas</h2>
+  <p style="color: beige;">O <b>reprodução de tartarugas</b>, em qualquer espécie, é realizada <b>através dos ovos</b>, que são depositados no meio, onde se desenvolvem e eclodem. 
+    O número de ovos por ninhada e o número de ninhos por ano varia de acordo com a espécie, como veremos um pouco mais adiante.</p>
+  <p style="color: beige;">Em todos os casos, <b>há um casal de macho e fêmea</b>, depois de um ritual de cortejo, no qual os machos frequentemente competem com outros
+     machos para copular com as fêmeas. 
+    É por isso que as tartarugas são animais de reprodução sexual.</p>
+  <p style="color: beige;">A época de reprodução e a idade fértil variam de acordo com a espécie de tartaruga, bem como de acordo com o ambiente e clima em que se encontra. 
+    No caso das tartarugas domésticas, a média para o início do <b>idade fértil</b> e 7 anos nos machos e 9 nas fêmeas, neste caso realizando uma postura de 5 a 8 ovos.</p>
+  
+  <img src="midia/persona-5-tokyo-rainy-night-thumb.jpg" alt="Baleia" style="width: 100%; border-radius: 10px; box-shadow: 0 0 0 4px white; margin-bottom: 1.5rem;">
+
+  <h2 style="color: #ffffff;">Como nascem as tartarugas terrestres?</h2>
+  <p style="color: beige;">A média das embreagens é <b>entre 5 e 8 ovos</b>, sendo este assentamento realizado em covas cavadas no solo pelas fêmeas.
+     A incubação não tem um prazo específico, pois varia substancialmente em função da temperatura do solo e da força e incidência dos raios solares.</p>
+  <p style="color: beige;">Uma vez que os filhotes eclodem, eles têm que ser fortes o suficiente para sair da cova onde estão os ovos, também nesta época eles são muito frágeis e altamente expostos a predadores, muitos deles não sobrevivem.
+    O tamanho de uma tartaruga terrestre ao nascer é de aproximadamente <b>3-4 centímetros</b> em comprimento total, embora varie de acordo com a espécie.</p>
+  </div>
+
+  <!-- Coluna direita: barra lateral com links -->
+  <aside style="flex: 1 1 30%; min-width: 250px; background: #f5f5f5; padding: 1rem; border-radius: 10px;">
+    <h3 style="margin-top: 0; color: #2c3e50;">Artigos relacionados</h3>
+    <ul style="list-style: none; padding-left: 0;">
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+    </ul>
+  </aside>
+
+</main>
+
+  <!-- Rodapé simples -->
+  <footer style="background: rgb(212, 211, 211); color: rgb(0, 0, 0); text-align: center; padding: 2rem; margin-top: 4rem;">
+    <p>Siga a Ocean Tides nas redes sociais:</p>
+    <p>
+      <a href="#" style="color: #00aaff;">Instagram</a> |
+      <a href="#" style="color: #00aaff;">Facebook</a> |
+      <a href="#" style="color: #00aaff;">Twitter</a>
+    </p>
+  </footer>
+
+</body>
+</html>
