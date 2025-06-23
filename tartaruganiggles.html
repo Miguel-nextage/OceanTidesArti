@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ocean Tides</title>
+  <link rel="stylesheet" href="padrao.css" />
+  <link rel="stylesheet" href="popup.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head> 
+
+<body background-color="black">
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+
+  <div class="navegacao-barra">
+    <!-- Navbar content here -->
+  </div>
+
+  <button onclick="AbrirPopupDoacao()" class="botao-doacao">Doar</button>
+
+  <script src="popup.js"></script>
+<script>
+// Detecta o scroll e muda o estilo da navbar
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navegacao-barra');
+  const scrollPosition = window.scrollY;
+  const triggerHeight = window.innerHeight * 0.1; 
+  
+  if (scrollPosition > triggerHeight) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+</script>
+
+<!--DIALOG DO POP UP DOAÇÃO, TUDO ENTRE ESTE COMENTÁRIO ENVOLVE JAVASCRIPT-->
+<dialog id="doacao-dialog">
+  <div class="pop-up-container-esq">
+    <img
+      class="img-popup-doacao"
+      src="midia/imagem doacao.jpg"
+      alt="Imagem de doação"
+    />
+    <h2>Você pode fazer a diferença.</h2>
+    <p class="primeiro">
+      Para tornar os mares amáveis e seguros novamente, contamos com a sua
+      ajuda.
+    </p>
+  </div>
+
+  <div class="pop-up-container-dir">
+    <div class="popup-top-bar">
+      <button id="botao-voltar-menu" class="botao-voltar" onclick="voltarParaMenu()" hidden>←</button>
+      <button
+        onclick="FecharPopupDoacao()"
+        type="button"
+        class="botao-popup-doacao"
+        aria-label="Fechar popup"
+      >
+        <img
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E"
+          alt="Fechar"
+        />
+      </button>
+    </div>
+
+    <!-- CONTEÚDO INICIAL - Menu valor -->
+    <div id="conteudo-menu" class="conteudo-menu-centralizado">
+      <h3 id="titulo-menu">Sua doação importa.</h3>
+      <div class="doacao-opcoes">
+        <button type="button" class="doacao-opcao" onclick="MudaValor(5)">R$5</button>
+        <button type="button" class="doacao-opcao" onclick="MudaValor(10)">R$10</button>
+        <button type="button" class="doacao-opcao" onclick="MudaValor(25)">R$25</button>
+        <button type="button" class="doacao-opcao" onclick="MudaValor(50)">R$50</button>
+        <button type="button" class="doacao-opcao" onclick="MudaValor(75)">R$75</button>
+        <button type="button" class="doacao-opcao" onclick="MudaValor(100)">R$100</button>
+        <div class="valor_preco">
+          <span class="simbolo-moeda">R$</span>
+          <input
+            type="number"
+            placeholder="Seu preço aqui:"
+            min="1"
+            step="any"
+            id="valor"
+            class="doacao-input"
+          />
+        </div>
+      </div>
+
+      <!-- DIV FORMAS DE PAGAMENTO APARECEM APÓS SELECIONAR VALOR -->
+      <div id="forma-pagamento-container" class="forma-pagamento-container">
+        <h4 id="titulo-pagamento">💳 Escolha a forma de pagamento:</h4>
+        <div id="selecao-pagamento" class="formas-pagamento-opcoes">
+          <button
+            class="forma-pagamento-opcao"
+            onclick="selecionarPagamento('cartao')"
+          >
+            💳 Cartão de Crédito
+          </button>
+          <button
+            class="forma-pagamento-opcao"
+            onclick="selecionarPagamento('pix')"
+          >
+            📱 Pix
+          </button>
+          <button
+            class="forma-pagamento-opcao"
+            onclick="selecionarPagamento('boleto')"
+          >
+            📋 Boleto
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULÁRIOS DE PAGAMENTO (inicialmente escondidos) -->
+    <div id="form-cartao" class="formulario-pagamento">
+      <div class="campo-grupo">
+        <label for="numero-cartao">Número do Cartão</label>
+        <input
+          type="text"
+          id="numero-cartao"
+          class="campo-input"
+          placeholder="0000 0000 0000 0000"
+          maxlength="19"
+        />
+      </div>
+      <div class="campo-grupo">
+        <label for="nome-cartao">Nome no Cartão</label>
+        <input
+          type="text"
+          id="nome-cartao"
+          class="campo-input"
+          placeholder="NOME COMPLETO"
+          style="text-transform: uppercase;"
+        />
+      </div>
+      <div class="campo-duplo">
+        <div class="campo-grupo">
+          <label for="validade">Validade</label>
+          <input
+            type="text"
+            id="validade"
+            class="campo-input"
+            placeholder="MM/AA"
+            maxlength="5"
+          />
+        </div>
+        <div class="campo-grupo">
+          <label for="cvv">CVV</label>
+          <input
+            type="text"
+            id="cvv"
+            class="campo-input"
+            placeholder="000"
+            maxlength="4"
+          />
+        </div>
+      </div>
+      <div class="campo-grupo">
+        <label for="cpf-cartao">CPF</label>
+        <input
+          type="text"
+          id="cpf-cartao"
+          class="campo-input"
+          placeholder="000.000.000-00"
+          maxlength="14"
+        />
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <button class="enviar" onclick="processarPagamentoCartao()">
+          Confirmar Pagamento
+        </button>
+      </div>
+    </div>
+
+    <div id="form-pix" class="formulario-pagamento">
+      <div class="info-pix">
+        <h5 style="margin: 0 0 1rem 0; color: #28a745;">🔥 Pagamento via PIX</h5>
+        <p style="margin: 0 0 1rem 0; font-size: 0.9rem;">
+          Escaneie o QR Code ou copie o código PIX abaixo:
+        </p>
+        <div class="qr-code-placeholder">
+          📱 QR Code PIX<br /><small>(Mockup)</small>
+        </div>
+        <div class="campo-grupo">
+          <label for="codigo-pix">Código PIX:</label>
+          <div class="codigo-pix" id="codigo-pix" onclick="copiarCodigoPix()" style="cursor: pointer;">
+            00020126580014BR.GOV.BCB.PIX013665a9e5b8...
+          </div>
+        </div>
+      </div>
+      <div class="campo-grupo">
+        <label for="cpf-pix">Confirme seu CPF</label>
+        <input
+          type="text"
+          id="cpf-pix"
+          class="campo-input"
+          placeholder="000.000.000-00"
+          maxlength="14"
+        />
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <button class="enviar" onclick="processarPagamentoPix()">
+          Confirmar PIX
+        </button>
+      </div>
+    </div>
+
+    <div id="form-boleto" class="formulario-pagamento">
+      <div
+        class="info-pix"
+        style="background: #fff3cd; border: 1px solid #ffeaa7"
+      >
+        <h5 style="margin: 0 0 1rem 0; color: #856404;">📋 Pagamento via Boleto</h5>
+        <p
+          style="margin: 0; font-size: 0.9rem; color: #856404"
+        >
+          O boleto será gerado após o preenchimento dos dados e terá vencimento
+          em 3 dias úteis.
+        </p>
+      </div>
+      <div class="campo-grupo">
+        <label for="nome-completo">Nome Completo</label>
+        <input
+          type="text"
+          id="nome-completo"
+          class="campo-input"
+          placeholder="Seu nome completo"
+        />
+      </div>
+      <div class="campo-grupo">
+        <label for="cpf-boleto">CPF</label>
+        <input
+          type="text"
+          id="cpf-boleto"
+          class="campo-input"
+          placeholder="000.000.000-00"
+          maxlength="14"
+        />
+      </div>
+      <div class="campo-grupo">
+        <label for="email">E-mail</label>
+        <input
+          type="email"
+          id="email"
+          class="campo-input"
+          placeholder="seu@email.com"
+        />
+      </div>
+      <div class="campo-grupo">
+        <label for="telefone">Telefone</label>
+        <input
+          type="text"
+          id="telefone"
+          class="campo-input"
+          placeholder="(11) 99999-9999"
+          maxlength="15"
+        />
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <button class="enviar" onclick="processarPagamentoBoleto()">
+          Gerar Boleto
+        </button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById("doacao-dialog");
+
+  // Containers e elementos
+  const formaPagamentoContainer = document.getElementById("forma-pagamento-container");
+  const conteudoMenu = document.getElementById("conteudo-menu");
+  const botaoVoltarMenu = document.getElementById("botao-voltar-menu");
+
+  // Formulários
+  const formCartao = document.getElementById("form-cartao");
+  const formPix = document.getElementById("form-pix");
+  const formBoleto = document.getElementById("form-boleto");
+
+  // Estado
+  let tipoPagamentoSelecionado = null;
+
+  function AbrirPopupDoacao() {
+    dialog.showModal();
+    resetarFormularios();
+  }
+
+  function FecharPopupDoacao() {
+    dialog.close();
+    resetarFormularios();
+  }
+
+  function resetarFormularios() {
+    // Voltar para menu inicial
+    mostrarMenuInicial();
+
+    // Esconder todos os formulários
+    formCartao.classList.remove("mostrar");
+    formPix.classList.remove("mostrar");
+    formBoleto.classList.remove("mostrar");
+
+    // Esconder formas de pagamento
+    formaPagamentoContainer.classList.remove("mostrar");
+
+    // Limpar campos input
+    document.querySelectorAll(".campo-input").forEach((input) => (input.value = ""));
+    document.getElementById("valor").value = "";
+
+    tipoPagamentoSelecionado = null;
+  }
+
+  function MudaValor(valor) {
+    document.getElementById("valor").value = valor;
+    // Mostrar formas de pagamento automaticamente quando um valor for selecionado
+    mostrarFormasPagamento();
+  }
+
+  // Mostra as formas de pagamento quando um valor é inserido
+  function mostrarFormasPagamento() {
+    const valorInput = document.getElementById("valor");
+    const valor = parseFloat(valorInput.value);
+
+    if (valor && valor > 0) {
+      formaPagamentoContainer.classList.add("mostrar");
+    }
+  }
+
+  // Quando usuário seleciona a forma de pagamento
+  function selecionarPagamento(tipo) {
+    const valorInput = document.getElementById("valor");
+    const valor = parseFloat(valorInput.value);
+
+    if (!valor || valor <= 0) {
+      alert("Por favor, selecione ou digite um valor para doação!");
+      return;
+    }
+
+    tipoPagamentoSelecionado = tipo;
+
+    // Esconder menu inicial inteiro
+    conteudoMenu.style.display = "none";
+
+    // Mostrar botão voltar
+    botaoVoltarMenu.hidden = false;
+
+    // Mostrar o formulário escolhido
+    formCartao.classList.remove("mostrar");
+    formPix.classList.remove("mostrar");
+    formBoleto.classList.remove("mostrar");
+
+    if (tipo === "cartao") formCartao.classList.add("mostrar");
+    else if (tipo === "pix") formPix.classList.add("mostrar");
+    else if (tipo === "boleto") formBoleto.classList.add("mostrar");
+  }
+
+  // Botão voltar para o menu inicial (seleção de valor + formas)
+  function voltarParaMenu() {
+    tipoPagamentoSelecionado = null;
+
+    // Esconder formulários
+    formCartao.classList.remove("mostrar");
+    formPix.classList.remove("mostrar");
+    formBoleto.classList.remove("mostrar");
+
+    // Esconder botão voltar
+    botaoVoltarMenu.hidden = true;
+
+    // Mostrar menu inicial
+    mostrarMenuInicial();
+  }
+
+  // Centraliza e mostra menu inicial
+  function mostrarMenuInicial() {
+    conteudoMenu.style.display = "flex";
+    // Manter formas de pagamento visíveis se houver valor
+    const valor = parseFloat(document.getElementById("valor").value);
+    if (valor && valor > 0) {
+      formaPagamentoContainer.classList.add("mostrar");
+    } else {
+      formaPagamentoContainer.classList.remove("mostrar");
+    }
+  }
+
+  // Event listener para mostrar formas de pagamento quando digitar valor
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("valor").addEventListener("input", mostrarFormasPagamento);
+  });
+
+  // Funções de processamento - simuladas
+
+  function processarPagamentoCartao() {
+    const numeroCartao = document.getElementById("numero-cartao").value;
+    const nomeCartao = document.getElementById("nome-cartao").value;
+    const validade = document.getElementById("validade").value;
+    const cvv = document.getElementById("cvv").value;
+    const cpf = document.getElementById("cpf-cartao").value;
+    const valor = document.getElementById("valor").value;
+
+    if (!numeroCartao || !nomeCartao || !validade || !cvv || !cpf) {
+      alert("Por favor, preencha todos os campos do cartão!");
+      return;
+    }
+
+    alert(
+      `✅ Pagamento processado com sucesso!\n\nValor: R$${valor}\nCartão: **** **** **** ${numeroCartao
+        .slice(-4)}\nPortador: ${nomeCartao}`
+    );
+    FecharPopupDoacao();
+  }
+
+  function processarPagamentoPix() {
+    const cpf = document.getElementById("cpf-pix").value;
+    const valor = document.getElementById("valor").value;
+
+    if (!cpf) {
+      alert("Por favor, confirme seu CPF!");
+      return;
+    }
+
+    alert(
+      `✅ Código PIX gerado com sucesso!\n\nValor: R$${valor}\nCPF: ${cpf}\n\nApós realizar o pagamento, sua doação será processada automaticamente.`
+    );
+    FecharPopupDoacao();
+  }
+
+  function processarPagamentoBoleto() {
+    const nome = document.getElementById("nome-completo").value;
+    const cpf = document.getElementById("cpf-boleto").value;
+    const email = document.getElementById("email").value;
+    const telefone = document.getElementById("telefone").value;
+    const valor = document.getElementById("valor").value;
+
+    if (!nome || !cpf || !email || !telefone) {
+      alert("Por favor, preencha todos os campos!");
+      return;
+    }
+
+    alert(
+      `✅ Boleto gerado com sucesso!\n\nValor: R$${valor}\nNome: ${nome}\nE-mail: ${email}\n\nO boleto foi enviado para seu e-mail e vence em 3 dias úteis.`
+    );
+    FecharPopupDoacao();
+  }
+
+  // Copiar código PIX
+  function copiarCodigoPix() {
+    const codigoPix = document.getElementById("codigo-pix").textContent;
+    navigator.clipboard
+      .writeText(codigoPix)
+      .then(() => {
+        alert("📋 Código PIX copiado para a área de transferência!");
+      })
+      .catch(() => {
+        // fallback
+        const textArea = document.createElement("textarea");
+        textArea.value = codigoPix;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        alert("📋 Código PIX copiado para a área de transferência!");
+      });
+  }
+
+  // Formatação automática dos campos
+  document.addEventListener("DOMContentLoaded", function () {
+    // Número do cartão
+    document.getElementById("numero-cartao").addEventListener("input", function (e) {
+      let value = e.target.value.replace(/\s/g, "").replace(/[^0-9]/gi, "");
+      let formattedValue = value.match(/.{1,4}/g)?.join(" ") || value;
+      e.target.value = formattedValue;
+    });
+
+    // Validade
+    document.getElementById("validade").addEventListener("input", function (e) {
+      let value = e.target.value.replace(/\D/g, "");
+      if (value.length >= 2) {
+        value = value.substring(0, 2) + "/" + value.substring(2, 4);
+      }
+      e.target.value = value;
+    });
+
+    // CPF formatação
+    function formatCPF(input) {
+      input.addEventListener("input", function (e) {
+        let value = e.target.value.replace(/\D/g, "");
+        value = value.replace(/(\d{3})(\d)/, "$1.$2");
+        value = value.replace(/(\d{3})(\d)/, "$1.$2");
+        value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        e.target.value = value;
+      });
+    }
+
+    formatCPF(document.getElementById("cpf-cartao"));
+    formatCPF(document.getElementById("cpf-pix"));
+    formatCPF(document.getElementById("cpf-boleto"));
+
+    // Telefone
+    document.getElementById("telefone").addEventListener("input", function (e) {
+      let value = e.target.value.replace(/\D/g, "");
+      value = value.replace(/(\d{2})(\d)/, "($1) $2");
+      value = value.replace(/(\d{5})(\d)/, "$1-$2");
+      e.target.value = value;
+    });
+
+    // CVV só números
+    document.getElementById("cvv").addEventListener("input", function (e) {
+      e.target.value = e.target.value.replace(/[^0-9]/g, "");
+    });
+  });
+
+  // Botão para teste - pode remover em produção
+  function testarDialog() {
+    AbrirPopupDoacao();
+  }
+</script>
+
+
+<!--DIALOG DO POP UP DOAÇÃO, TUDO ENTRE ESTE COMENTÁRIO ENVOLVE JAVASCRIPT-->
+  <header>
+    <div class="navegacao-barra">
+      <a href="pagina-inicial.html"><img alt="logo" src="midia/logo.png" class="logo" ></a>
+      <div class="navegacao">
+        <nav>
+          <ul>
+            <li><button class="botao-nao-decorado" href="#">Sobre Nós</button></li>
+            <li><button class="botao-nao-decorado" href="#">Newsletter</button></li>
+            <li><button class="botao-nao-decorado" type="button" onclick="AbrirPopupDoacao()">Doe</button></li>
+          </ul>
+        </nav>
+      </div>
+      <hr />
+    </div>
+  </header>
+
+  <script src="botao-doacao.js"></script>
+ <!-- Espaço para compensar o header fixo -->
+  <div style="height: 100px;"></div>
+
+  <!-- Conteúdo principal do artigo -->
+ <main class="container" style="max-width: 1100px; margin: auto; padding: 2rem; display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+
+  <!-- Coluna esquerda: imagem + texto -->
+  <div style="flex: 1 1 60%; min-width: 300px;">
+    <div  data-aos="fade-up">
+    <h1 style="color: #ffffff;">Como as tartarugas nascem?</h1>
+    <p style="color: #666; font-size: 0.9rem;">&bullet; Publicado em: 29 de Abril de 2025</p>
+
+    <img src="midia/tartarugas1.webp" alt="Baleia" style="width: 100%; border-radius: 10px; box-shadow: 0 0 0 4px white; margin-bottom: 1.5rem;">
+
+  <p style="color: beige;">As tartarugas São animais pertencentes à Ordem dos Testudines que se adaptaram maravilhosamente a diferentes ambientes, habitats e ambientes, por isso se tornaram populares em muitos países, sendo até considerados animais domésticos em alguns casos.
+    No entanto, após a reprodução dos quelônios, é muito provável que você se pergunte <b>como as tartarugas nascem</b>
+    Vamos falar sobre aqueles que vivem na terra, no mar ou na água doce.</p>
+  <p style="color: beige;">Você sabia que uma tartaruga marinha pode colocar <b>mais de 800 ovos</b> em um único período reprodutivo?
+    Neste artigo, falaremos em detalhes sobre o nascimento das tartarugas e muitos outros aspectos importantes desse período.
+    Continue lendo para descobrir tudo sobre esses animais fascinantes!</p>
+  </div>
+  <div data-aos="fade-up">
+  <h2 style="color: #ffffff;">Informações sobre tartarugas</h2>
+  <p style="color: beige;">As tartarugas pertencem ao reino animal, pertencendo à família dos répteis, sendo da Ordem dos Testudinos ou quelônios.
+    Eles são caracterizados por serem animais vertebrados tetrápodes e com uma concha que é fixada na parte dorsal da coluna vertebral. leste <b>Concha</b> É composto por diferentes lâminas ósseas que cobrem tanto a parte ventral, uma área chamada plastrão, quanto a parte dorsal, chamada dorso. 
+    Eles fazem uma muda tanto da pele quanto das camadas que compõem os escudos da concha</p>
+  <p style="color: beige;">São animais <b>poiquilotérmicos</b> ou <b>ectotérmicos</b>, o que significa que eles não têm a capacidade de autorregular sua própria temperatura corporal, 
+    algo que o meio ambiente fará. Eles não têm dentes, mas têm um bico ossudo que se assemelha ao de alguns pássaros.</p>
+  </div>
+  <div  data-aos="fade-up">
+  <img src="midia/tartarugas2.webp" alt="Baleia" style="width: 100%; border-radius: 10px; box-shadow: 0 0 0 4px white; margin-bottom: 1.5rem;">
+
+  <h2 style="color: #ffffff;">Onde vivem as tartarugas?</h2>
+  <p style="color: beige;">As tartarugas são répteis que estão presentes em uma grande variedade de habitats e ecossistemas. 
+    Eles habitam mares, rios, lagos, florestas e selvas, entre outros. Dependendo da espécie de tartaruga, podemos encontrá-los em:</p>
+  <p style="color: beige;">As <b>tartarugas terrestres</b> vivem em selvas, desertos e florestas, adaptando-se a condições áridas e temperaturas extremamente altas.</p>
+  <p style="color: beige;">As <b>tartarugas marinhas</b> Eles vivem nos mares e oceanos de todo o planeta, preferindo as regiões tropicais e subtropicais. 
+    Eles não estão presentes em áreas muito frias, muito menos nos pólos.</p>
+  <p style="color: beige;">As <b>tartarugas de água doce</b> Vivem em rios, florestas, selvas e lagos onde, em geral, as temperaturas são temperadas ou amenas.</p>
+  <p style="color: beige;">No caso de mantê-los como animais de estimação, as tartarugas precisam de um <b>espaço de vida adaptado ou terrário</b> às suas dimensões e em que as condições
+     de temperatura e umidade sejam bem controladas. 
+     Se temos tartarugas aquáticas em casa, elas devem permanecer em um aquário de água doce ou salgada de acordo com o tipo e a uma temperatura adequada.</p>
+    </div>
+  <div  data-aos="fade-up">
+  <h2 style="color: #ffffff;">Reprodução das tartarugas</h2>
+  <p style="color: beige;">O <b>reprodução de tartarugas</b>, em qualquer espécie, é realizada <b>através dos ovos</b>, que são depositados no meio, onde se desenvolvem e eclodem. 
+    O número de ovos por ninhada e o número de ninhos por ano varia de acordo com a espécie, como veremos um pouco mais adiante.</p>
+  <p style="color: beige;">Em todos os casos, <b>há um casal de macho e fêmea</b>, depois de um ritual de cortejo, no qual os machos frequentemente competem com outros
+     machos para copular com as fêmeas. 
+    É por isso que as tartarugas são animais de reprodução sexual.</p>
+  <p style="color: beige;">A época de reprodução e a idade fértil variam de acordo com a espécie de tartaruga, bem como de acordo com o ambiente e clima em que se encontra. 
+    No caso das tartarugas domésticas, a média para o início do <b>idade fértil</b> e 7 anos nos machos e 9 nas fêmeas, neste caso realizando uma postura de 5 a 8 ovos.</p>
+  </div>
+  <div  data-aos="fade-up">
+  <img src="midia/tartarugas3.webp" alt="Baleia" style="width: 100%; border-radius: 10px; box-shadow: 0 0 0 4px white; margin-bottom: 1.5rem;">
+
+  <h2 style="color: #ffffff;">Como nascem as tartarugas?</h2>
+  <p style="color: beige;">A média das embreagens é <b>entre 5 e 8 ovos</b>, sendo este assentamento realizado em covas cavadas no solo pelas fêmeas.
+     A incubação não tem um prazo específico, pois varia substancialmente em função da temperatura do solo e da força e incidência dos raios solares.</p>
+  <p style="color: beige;">Uma vez que os filhotes eclodem, eles têm que ser fortes o suficiente para sair da cova onde estão os ovos, também nesta época eles são muito frágeis e altamente expostos a predadores, muitos deles não sobrevivem.
+    O tamanho de uma tartaruga terrestre ao nascer é de aproximadamente <b>3-4 centímetros</b> em comprimento total, embora varie de acordo com a espécie.</p>
+
+  <h2 style="color: #ffffff;"> Ovos de tartaruga podem ser chocados?</h2>
+  <p style="color: beige;">Se nossa própria tartaruga botou ovos, o que devemos fazer? Podemos incubá-los nós mesmos? A resposta é SIM Se temos ovos de tartaruga e queremos tentar retirá-los, podemos recorrer a uma incubação artificial deles. 
+    Para isso, temos que comprar ou fabricar um <b>incubadora</b> O mais importante é que nos permite manter uma temperatura e humidade adequadas.</p>
+    <p style="color: beige;">O tempo de gestação e a taxa de sucesso da incubação dependem, em primeiro lugar, das condições em que os ovos se encontram, porque quando os encontramos podem estar <b>danificado</b> ou não mais fértil.
+       Geralmente é recomendável verificar se o ovo é fértil, usando o truque de vê-lo contra a luz. Também vai depender do <b>espécies</b>, porque em alguns é mais fácil, enquanto em outros casos é quase impossível ter sucesso se você não tiver muita experiência e conhecimento suficiente.</p>
+    <p style="color: beige;">Suspeitando que alguns ovos na natureza podem estar em perigo, chamaremos o <b>Agentes Florestais</b> da nossa Comunidade ou ao número de Emergências para que nos encaminhem. Vamos relatar a situação e, só então, procederemos a seguir as instruções dos agentes.
+       Eles podem nos pedir ajuda e transferir os óvulos para um <b>centro de recuperação da vida selvagem</b> ou para uma clínica veterinária específica.</p>
+    <p style="color: beige;">Se você quiser ler mais artigos semelhantes a <b>Como as tartarugas nascem?</b>, recomendamos que você entre em nossa seção Newsletter.</p>
+  </div>
+  </div>
+  <!-- Coluna direita: barra lateral com links -->
+  <aside style="flex: 1 1 30%; min-width: 250px; background: #f5f5f5; padding: 1rem; border-radius: 10px;">
+    <h3 style="margin-top: 0; color: #2c3e50;">Artigos relacionados</h3>
+    <ul style="list-style: none; padding-left: 0;">
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+      <li><a href="#" style="text-decoration: none; color: #005577;"></a></li>
+    </ul>
+  </aside>
+
+</main>
+
+  <!-- Rodapé simples -->
+  <footer style="background: rgb(212, 211, 211); color: rgb(0, 0, 0); text-align: center; padding: 2rem; margin-top: 4rem;">
+    <p>Siga a Ocean Tides nas redes sociais:</p>
+    <p>
+      <a href="#" style="color: #00aaff;">Instagram</a> |
+      <a href="#" style="color: #00aaff;">Facebook</a> |
+      <a href="#" style="color: #00aaff;">Twitter</a>
+    </p>
+  </footer>
+
+</body>
+</html>
